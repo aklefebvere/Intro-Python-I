@@ -30,3 +30,57 @@ it should use today’s date to get the month and year.
 import sys
 import calendar
 from datetime import datetime
+
+# Todays date
+theday = str(datetime.today())
+
+# Split on "-" to separate the year and month into their own index
+theday_split = theday.split("-")
+
+# Today's year
+theyear = int(theday_split[0])
+
+# Today's month
+themonth = theday_split[1]
+
+# Since python cannot have a 0 infront of a int,
+# you have to remove it and convert the month into a int
+if themonth[0] == '0':
+  themonth = int(themonth[1])
+
+# If the month is above September, just convert it into a int
+else:
+  themonth = int(themonth)
+
+# Instansiate a calendar.TextCalendar class
+thecalendar = calendar.TextCalendar() 
+
+# If there is more then 2 system arguments
+if len(sys.argv) >= 2:
+  # Create a month variable with the user's specified month
+  month = int(sys.argv[1])
+
+  # If the user specified a year
+  if len(sys.argv) == 3:
+    # Create a year variable with the user's specified year
+    year = int(sys.argv[2])
+
+    # Create a calendar with the user's month and year
+    print(thecalendar.formatmonth(theyear = year, themonth  = month))
+  
+  # If the user did not specify a year, create a calendar with the user's month
+  # and the current year
+  else:
+    print(thecalendar.formatmonth(theyear = theyear, themonth  = month))
+
+# if the user did not specify and month or year, create a calendar
+# with the current month and year
+else:
+  print(thecalendar.formatmonth(theyear = theyear, themonth  = themonth))
+
+
+
+
+
+
+
